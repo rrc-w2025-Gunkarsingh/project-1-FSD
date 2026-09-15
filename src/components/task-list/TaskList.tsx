@@ -1,3 +1,4 @@
+import './TaskList.css'
 function TaskList() {
   const tasks = [
     {
