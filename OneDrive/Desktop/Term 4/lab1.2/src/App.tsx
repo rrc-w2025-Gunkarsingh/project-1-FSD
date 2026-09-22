@@ -1,10 +1,12 @@
+import { useState } from "react";
 import "./App.css";
 import { Header } from "./components/header";
 import { Footer } from "./components/Footer";
 import { EmployeeCard } from "./components/EmployeeCard";
+import { EmployeeForm } from "./components/EmployeeForm";
 import type { Employee } from "./types";
 
-const employees: Employee[] = [
+const initialEmployees: Employee[] = [
   {
     id: 1,
     name: "John Smith",
@@ -22,6 +24,24 @@ const employees: Employee[] = [
 ];
 
 function App() {
+  const [employees, setEmployees] =
+    useState<Employee[]>(initialEmployees);
+
+  function addEmployee(firstName: string, department: string) {
+    const newEmployee: Employee = {
+      id: Date.now(),
+      name: firstName,
+      position: "New Employee",
+      department: department,
+      email: `${firstName.toLowerCase()}@example.com`,
+    };
+
+    setEmployees((currentEmployees) => [
+      ...currentEmployees,
+      newEmployee,
+    ]);
+  }
+
   return (
     <>
       <Header />
@@ -37,6 +57,8 @@ function App() {
             />
           ))}
         </section>
+
+        <EmployeeForm onAddEmployee={addEmployee} />
       </main>
 
       <Footer />
