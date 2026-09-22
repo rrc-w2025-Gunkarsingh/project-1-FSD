@@ -49,13 +49,34 @@ function App() {
       <main>
         <h1>Our Employees</h1>
 
+        <h2>Finance</h2>
+
         <section className="employees">
-          {employees.map((employee) => (
-            <EmployeeCard
-              key={employee.id}
-              employee={employee}
-            />
-          ))}
+          {employees
+            .filter(
+              (employee) => employee.department === "Finance"
+            )
+            .map((employee) => (
+              <EmployeeCard
+                key={employee.id}
+                employee={employee}
+              />
+            ))}
+        </section>
+
+        <h2>Technology</h2>
+
+        <section className="employees">
+          {employees
+            .filter(
+              (employee) => employee.department === "Technology"
+            )
+            .map((employee) => (
+              <EmployeeCard
+                key={employee.id}
+                employee={employee}
+              />
+            ))}
         </section>
 
         <EmployeeForm onAddEmployee={addEmployee} />
